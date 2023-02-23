@@ -5,40 +5,58 @@ import { Metaplex, keypairIdentity } from "@metaplex-foundation/js";
 import { Connection, clusterApiUrl, Keypair, PublicKey } from "@solana/web3.js";
 
 
-
 function App() {
   
-  const [nfts, setNfts] = useState<any>(null)
-  const getNFTs = async () => {
+  const axios = require("axios");
+  const wallet =  "DcTmx4VLcf5euAB17nynax7g55xuB3XKBDyz1pudMcjW"
+  const [first_nft, setNFT] = useState<any>(null);
 
-    console.log("Finding NFTs");
-    const connection = new Connection(clusterApiUrl("mainnet-beta"), "confirmed");
-    const keypair = Keypair.generate();
-  
-    const metaplex = new Metaplex(connection);
-    metaplex.use(keypairIdentity(keypair));
-  
-    const owner = new PublicKey("3kQG4UgztyTF9MnJwcKaCPFv5FD64Vk13YzxUrtWgrZn");
-    const allNFTs = await metaplex.nfts().findAllByOwner({ owner: owner });
-  
-    console.log(allNFTs);
-    setNfts(allNFTs)
-
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
   };
+  const data = {
+    jsonrpc: "2.0",
+    id: 1,
+    method: "qn_fetchNFTs",
+    params: {
+      wallet: wallet,
+      omitFields: ["provenance", "traits"],
+      page: 1,
+      perPage: 10,
+    },
+  };
+  axios
+    .post("mainnet-beta", data, config) // placeholder, use quicknode to test
+    .then(function (response: any) {
+      console.log(response.data);
+      setNFT(response.data.result.assets[0].name);
+      // handle success
+      console.log(response.data);
+    })
+    .catch((err: any) => {
+      // handle error
+      console.log(err);
+    });
 
-  useEffect(() => {
-    getNFTs()
-  }, [])
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
+          Wallet:
+        </p>
+        <div>
+        { `${wallet}` }
+        </div>
+
+        <p>
           List of NFTs:
         </p>
 
         <div>
-          { `${nfts}` }
+        { `${first_nft}` }
         </div>
         
       </header>
