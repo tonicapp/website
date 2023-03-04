@@ -1,6 +1,6 @@
 import { Title } from '@mantine/core'
 import Head from 'next/head'
-import Image from 'next/image'
+import Hero from 'src/components/landing/Hero'
 
 export default function Landing() {
   return (
@@ -12,8 +12,7 @@ export default function Landing() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Image src="/logo.png" alt="main logo" width={500} height={500}/>
-        <Title order={1}>Tonic</Title>
+        <Hero />
       </main>
     </>
   )
