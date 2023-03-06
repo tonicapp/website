@@ -3,8 +3,6 @@ import SongForm from "./SongForm";
 
 const UploadSongPage: React.FC = () => {
   const handleSubmit = (formData: FormData) => {
-    console.log(formData);
-
     fetch("http://localhost:3333/api/uploadsong", {
       method: "POST",
       body: formData,

@@ -1,17 +1,56 @@
 import React, { useState } from "react";
+// import { Configuration, OpenAIApi } from "openai";
+// import * as dotenv from "dotenv";
+// require('dotenv').config()
+
+// // TODO: This is a security risk and should be moved to the backend
+// const configuration = new Configuration({
+//   organization: process.env.OPENAI_ORG_ID,
+//   apiKey: process.env.OPENAI_API_SECRET_KEY,
+// });
+// const openai = new OpenAIApi(configuration);
 
 interface SongFormProps {
   onSubmit: (formData: FormData) => void;
 }
 
 const SongForm: React.FC<SongFormProps> = ({ onSubmit }) => {
-//   const [formData, setFormData] = useState<FormData>(new FormData());
   const [title, setTitle] = useState<string>("");
   const [artist, setArtist] = useState<string>("");
   const [album, setAlbum] = useState<string>("");
   const [genre, setGenre] = useState<string>("");
   const [songFile, setSongFile] = useState<File | null>(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  // const [promptText, setPromptText] = useState<string>("");
+
+  // const handlePromptTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setPromptText(e.target.value);
+  // };
+
+  // const generateCoverArt = async () => {
+  //   try {
+  //     const response = await openai.createImage({
+  //       prompt: promptText,
+  //       n: 1,
+  //       size: "512x512",
+  //     });
+  //     const imageUrlOption = response.data.data[0].url;
+  //     let imageUrl: string;
+  //     if (imageUrlOption !== undefined) {
+  //       imageUrl = imageUrlOption as string;
+  //     } else {
+  //       return;
+  //     }
+  //     setImagePreview(imageUrl);
+  //     const generatedImage = await fetch(imageUrl);
+  //     const blob = await generatedImage.blob();
+  //     const imageFileGen = new File([blob], "generatedAIImage", { type: blob.type });
+  //     setImageFile(imageFileGen);
+  //   } catch(error: any) {
+  //     console.log(error.message);
+  //   }
+  // }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> ) => {
     switch (e.target.name) {
@@ -36,14 +75,62 @@ const SongForm: React.FC<SongFormProps> = ({ onSubmit }) => {
     }
   };
 
+  /**
+   * Function that checks if inputted images have a 1:1 aspect ratio
+   * and are > 500x500px and <= 1500x1500px.
+   * @param file Image file uploaded by user
+   * @returns Promise that either contains 
+   */
+  const checkImageSizeAndAspectRatio = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      if (event.target) {
+        const img = new Image();
+        img.src = event.target.result as string;
+        img.onload = () => {
+          console.log(`Width: ${img.width} Height: ${img.height}`);
+          if (
+            img.width < 500 ||
+            img.width > 1500 ||
+            img.height < 500 ||
+            img.height > 1500 ||
+            img.width !== img.height
+          ) {
+            setImageFile(null);
+            setImagePreview(null);
+            alert("Please upload a square image between 500px and 1500px on each side.");
+          } else {
+            setImagePreview(img.src);
+            setImageFile(file);
+            console.log(`Image preview: ${imagePreview}`);
+          }
+        };
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
   const handleImageFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      setImageFile(e.target.files[0]);
+      try {
+        checkImageSizeAndAspectRatio(e.target.files[0]);
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!title || !artist || !album || !genre || !songFile || !imageFile) {
+      alert('Please fill in all required fields.');
+      return;
+    } else if (imageFile.type !== 'image/jpeg') {
+      alert('Please upload a JPEG image.');
+      setImageFile(null);
+      setImagePreview(null);
+      return;
+    }
     const formData = new FormData();
     formData.append("title", title);
     formData.append("artist", artist);
@@ -62,19 +149,19 @@ const SongForm: React.FC<SongFormProps> = ({ onSubmit }) => {
     <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="title">Title:</label>
-        <input type="text" id="title" name="title" onChange={handleInputChange}/>
+        <input type="text" id="title" name="title" required onChange={handleInputChange}/>
       </div>
       <div>
         <label htmlFor="artist">Artist:</label>
-        <input type="text" id="artist" name="artist" onChange={handleInputChange}/>
+        <input type="text" id="artist" name="artist" required onChange={handleInputChange}/>
       </div>
       <div>
         <label htmlFor="album">Album:</label>
-        <input type="text" id="album" name="album" onChange={handleInputChange}/>
+        <input type="text" id="album" name="album" required onChange={handleInputChange}/>
       </div>
       <div>
         <label htmlFor="genre">Genre:</label>
-        <select id="genre" name="genre" onChange={handleInputChange}>
+        <select id="genre" name="genre" required onChange={handleInputChange}>
           <option value="">--Select Genre--</option>
           <option value="acapella">Acapella</option>
           <option value="acid">Acid</option>
@@ -227,11 +314,15 @@ const SongForm: React.FC<SongFormProps> = ({ onSubmit }) => {
       </div>
       <div>
         <label htmlFor="songFile">Song:</label>
-        <input type="file" id="songFile" name="songFile" accept="audio/mp3" onChange={handleSongFileChange}/>
+        <input type="file" id="songFile" name="songFile" accept="audio/mp3" required onChange={handleSongFileChange}/>
       </div>
       <div>
         <label htmlFor="imageFile">Cover Art:</label>
-        <input type="file" id="imageFile" name="imageFile" accept="image/jpeg" onChange={handleImageFileChange}/>
+        <input type="file" id="imageFile" name="imageFile" accept="image/jpeg" required onChange={handleImageFileChange}/>
+        {/* <p>No cover art? Generate some with a prompt:</p>
+        <input type="text" placeholder="Enter prompt text" value={promptText} onChange={handlePromptTextChange} />
+        <button onClick={generateCoverArt}>Generate cover art</button> */}
+        {imagePreview && <img src={imagePreview} alt="Image Preview" />}
       </div>
       <button type="submit">Submit</button>
     </form>
