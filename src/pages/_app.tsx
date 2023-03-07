@@ -8,7 +8,7 @@ import { Web3Provider } from "src/providers/Web3Provider"
 
 export default function App({ Component, pageProps }: AppProps) {
 
-  const [colorScheme, setColorScheme] = useState<ColorScheme>('light');
+  const [colorScheme, setColorScheme] = useState<ColorScheme>('dark');
   const toggleColorScheme = (value?: ColorScheme) =>
     setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
 

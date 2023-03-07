@@ -1,109 +1,42 @@
-import { createStyles, Container, Text, Button, Group, Flex } from '@mantine/core';
-import Image from 'next/image';
-
-const BREAKPOINT = '@media (max-width: 755px)';
-
-const useStyles = createStyles((theme) => ({
-  wrapper: {
-    position: 'relative',
-    boxSizing: 'border-box',
-    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
-  },
-
-  inner: {
-    position: 'relative',
-    paddingTop: 50,
-    paddingBottom: 120,
-
-    [BREAKPOINT]: {
-      paddingBottom: 80,
-      paddingTop: 80,
-    },
-  },
-
-  title: {
-    fontSize: 62,
-    fontWeight: 900,
-    lineHeight: 1.1,
-    margin: 0,
-    padding: 0,
-    color: theme.colorScheme === 'dark' ? theme.white : theme.black,
-
-    [BREAKPOINT]: {
-      fontSize: 42,
-      lineHeight: 1.2,
-    },
-  },
-
-  description: {
-    marginTop: theme.spacing.xl,
-    fontSize: 24,
-
-    [BREAKPOINT]: {
-      fontSize: 18,
-    },
-  },
-
-  controls: {
-    marginTop: theme.spacing.xl * 2,
-
-    [BREAKPOINT]: {
-      marginTop: theme.spacing.xl,
-    },
-  },
-
-  control: {
-    height: 54,
-    paddingLeft: 38,
-    paddingRight: 38,
-
-    [BREAKPOINT]: {
-      height: 54,
-      paddingLeft: 18,
-      paddingRight: 18,
-      flex: 1,
-    },
-  },
-}));
+import { Flex, Grid, Title, Card, Text, Button } from '@mantine/core';
+import { useRouter } from "next/router"
+import RightArrow from "@material-symbols/svg-400/outlined/arrow_right_alt.svg"
 
 export default function Hero() {
-  const { classes } = useStyles();
-
+  const router = useRouter()
   return (
-    <div className={classes.wrapper}>
-      <Container size={700} className={classes.inner}>
-        <Flex align="center">
-          <Image src="/logo.png" width={200} height={200} alt="Tonic Logo"/>
-          <h1 className={classes.title}>
-            Tonic
-          </h1>
-        </Flex>
-        
+    <Flex className='w-full justify-center flex-col mt-10'>
+      <Title order={4} fw={400} className='text-center' italic>Impressive</Title>
+      <Title className='text-center text-7xl'>Catch Phrase</Title>
 
-        <Text className={classes.description} color="dimmed">
-          Something very cool about Tonic
-        </Text>
-
-        <Group className={classes.controls}>
-          <Button
-            size="xl"
-            className={classes.control}
-            variant="gradient"
-            gradient={{ from: '#3D39ED', to: '#0073FC' }}
-          >
-            {`I'm an artist`}
-          </Button>
-
-          <Button
-            component="a"
-            size="xl"
-            variant="default"
-            className={classes.control}
-          >
-            {`I'm a user`}
-          </Button>
-        </Group>
-      </Container>
-    </div>
+      <Grid className='mt-16'>
+        <Grid.Col span={6}>
+          <Card className='mx-20 bg-opacity-50 blur-xl' mih={200} shadow="xl" radius="lg">
+            <Title className='text-3xl'>
+              {`I'm a fan`}
+            </Title>
+            <Text className='mt-5' color="dimmed" size="sm">
+              {`Support your favorite artists directly by buying their songs, albums, playlists, and merch. Best of all, get NFTs of songs on purchase. Go above and beyond with artist subscriptions.`}
+            </Text>
+            <Button variant='gradient' gradient={{ from: '#3D39ED', to: '#0073FC' }} size="sm" radius={50} rightIcon={<RightArrow className="h-5 w-5 fill-white" />} className="mt-12" onClick={() => router.push('/fans')}>
+              Learn More
+            </Button>
+          </Card>
+        </Grid.Col>
+        <Grid.Col span={6}>
+          <Card className='mx-20 bg-opacity-50 blur-xl' mih={200} shadow="xl" radius="lg">
+            <Title className='text-3xl'>
+              {`I'm an artist`}
+            </Title>
+            <Text className='mt-5' color="dimmed" size="sm">
+              Become the next big thing without dealing with the BS. Say goodbye to ridiculous commissions and welcome in new revenue sources, all while engaging your fans on the same platform.
+            </Text>
+            <Button variant='gradient' gradient={{ from: '#3D39ED', to: '#0073FC' }} size="sm" radius={50} rightIcon={<RightArrow className="h-5 w-5 fill-white" />} className="mt-12" onClick={() => router.push('/fans')}>
+              Learn More
+            </Button>
+          </Card>
+        </Grid.Col>
+      </Grid>
+    </Flex>
   );
 }
