@@ -4,7 +4,7 @@ import { useRouter } from "next/router"
 export default function CallToAction() {
   const router = useRouter()
   return (
-    <Flex align="center" direction="column">
+    <Flex align="center" direction="column" className="pt-10">
       <Title order={4} fw={400} className='text-center' italic>Impressive</Title>
       <Title className='text-center text-7xl'>Catch Phrase</Title>
       <div className="mt-8">
