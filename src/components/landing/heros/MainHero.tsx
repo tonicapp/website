@@ -2,7 +2,7 @@ import { Flex, Grid, Title, Card, Text, Button } from '@mantine/core';
 import { useRouter } from "next/router"
 import RightArrow from "@material-symbols/svg-400/outlined/arrow_right_alt.svg"
 
-export default function Hero() {
+export default function MainHero() {
   const router = useRouter()
   return (
     <Flex className='w-full justify-center flex-col'>
@@ -31,7 +31,7 @@ export default function Hero() {
             <Text className='mt-5' color="dimmed" size="sm">
               Become the next big thing without dealing with the BS. Say goodbye to ridiculous commissions and welcome in new revenue sources, all while engaging your fans on the same platform.
             </Text>
-            <Button variant='gradient' gradient={{ from: '#3D39ED', to: '#0073FC' }} size="sm" radius={50} rightIcon={<RightArrow className="h-5 w-5 fill-white" />} className="mt-12" onClick={() => router.push('/fans')}>
+            <Button variant='gradient' gradient={{ from: '#3D39ED', to: '#0073FC' }} size="sm" radius={50} rightIcon={<RightArrow className="h-5 w-5 fill-white" />} className="mt-12" onClick={() => router.push('/artists')}>
               Learn More
             </Button>
           </Card>

@@ -34,7 +34,7 @@ const extraInfo = [
   },
 ]
 
-export default function Features() {
+export default function MainFeatures() {
   return (
     <div className="px-20">
       <Title className="text-5xl">Why Tonic?</Title>

@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import Hero from 'src/components/landing/Hero'
-import Features from 'src/components/landing/Features'
+import MainHero from 'src/components/landing/heros/MainHero'
+import MainFeatures from 'src/components/landing/features/MainFeatures'
 import LandingLayout from 'src/layouts/LandingLayout'
 import CallToAction from 'src/components/landing/CallToAction'
 
@@ -15,8 +15,8 @@ export default function Landing() {
       </Head>
       <main>
         <LandingLayout>
-            <Hero />
-            <Features />
+            <MainHero />
+            <MainFeatures />
             <CallToAction />
         </LandingLayout>
       </main>
