@@ -1,4 +1,4 @@
-import { Footer, Grid, Flex, Title, Text, Group, ActionIcon } from "@mantine/core";
+import { Footer, Grid, Flex, Title, Text, Group, ActionIcon, TextInput, Button } from "@mantine/core";
 import Image from "next/image";
 import { IconBrandDiscord, IconBrandYoutube, IconBrandTwitter, IconBrandInstagram, IconBrandGithub, IconBrandTelegram } from "@tabler/icons-react";
 
@@ -18,9 +18,11 @@ export default function MainFooter() {
         <Grid.Col className="pl-20 pt-10 space-y-3" span={4}>
           <Flex align="center" className="space-x-1">
             <Image src="/logo.png" alt="Tonic Logo" width={30} height={30}/>
-            <Title order={5}>Tonic</Title>
+            <div>
+              <Title order={5}>Tonic</Title>
+              <Text color="dimmed" size="xs">Tonic is very cool</Text>
+            </div>
           </Flex>
-          <Text color="dimmed" size="xs">Tonic is very cool</Text>
           <Group spacing="sm">
             { icons.map((icon) => {
               return (
@@ -34,11 +36,18 @@ export default function MainFooter() {
           </Group>
           <Text size="xs">© Tonic 2023. All rights reserved.</Text>
         </Grid.Col>
-        <Grid.Col span={3}>
-          
+        <Grid.Col span={4}>
+
         </Grid.Col>
-        <Grid.Col span={5}>
-          
+        <Grid.Col span={4} className="pr-20 pt-10 space-y-3">
+          <div>
+            <Title order={6}>Stay in the loop</Title>
+            <Text color="dimmed" size="xs">Stay up to date with everything Tonic</Text>
+          </div>
+          <Flex className="space-x-2">
+            <TextInput placeholder="Your Email" radius="xl" />
+            <Button color="gray" variant="outline" radius="xl">Sign Up</Button>
+          </Flex>
         </Grid.Col>
       </Grid>
     </Footer>
