@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Hero from 'src/components/landing/Hero'
 import Features from 'src/components/landing/Features'
 import LandingLayout from 'src/layouts/LandingLayout'
+import CallToAction from 'src/components/landing/CallToAction'
 
 export default function Landing() {
   return (
@@ -16,6 +17,7 @@ export default function Landing() {
         <LandingLayout>
             <Hero />
             <Features />
+            <CallToAction />
         </LandingLayout>
       </main>
     </>
