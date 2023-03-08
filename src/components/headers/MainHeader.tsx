@@ -38,7 +38,7 @@ export default function MainHeader() {
             </Button>
             <ActionIcon
               size="md"
-              variant="light"
+              variant="subtle"
               color={dark ? 'yellow' : 'indigo'}
               onClick={() => toggleColorScheme()}
               title="Toggle color scheme"

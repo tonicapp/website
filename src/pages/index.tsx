@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Hero from 'src/components/landing/Hero'
-import { AppShell } from '@mantine/core'
-import MainHeader from 'src/components/headers/MainHeader'
+import Features from 'src/components/landing/Features'
+import LandingLayout from 'src/layouts/LandingLayout'
 
 export default function Landing() {
   return (
@@ -13,9 +13,10 @@ export default function Landing() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <AppShell header={<MainHeader />} padding={0}>
+        <LandingLayout>
             <Hero />
-        </AppShell>
+            <Features />
+        </LandingLayout>
       </main>
     </>
   )

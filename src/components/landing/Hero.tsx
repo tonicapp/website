@@ -5,13 +5,13 @@ import RightArrow from "@material-symbols/svg-400/outlined/arrow_right_alt.svg"
 export default function Hero() {
   const router = useRouter()
   return (
-    <Flex className='w-full justify-center flex-col mt-10'>
+    <Flex className='w-full justify-center flex-col'>
       <Title order={4} fw={400} className='text-center' italic>Impressive</Title>
       <Title className='text-center text-7xl'>Catch Phrase</Title>
 
       <Grid className='mt-16'>
         <Grid.Col span={6}>
-          <Card className='mx-20 bg-opacity-50 blur-xl' mih={200} shadow="xl" radius="lg">
+          <Card className='mx-20' withBorder shadow="xl" mih={200} radius="lg">
             <Title className='text-3xl'>
               {`I'm a fan`}
             </Title>
@@ -24,7 +24,7 @@ export default function Hero() {
           </Card>
         </Grid.Col>
         <Grid.Col span={6}>
-          <Card className='mx-20 bg-opacity-50 blur-xl' mih={200} shadow="xl" radius="lg">
+          <Card className='mx-20' mih={200} withBorder shadow="xl" radius="lg">
             <Title className='text-3xl'>
               {`I'm an artist`}
             </Title>

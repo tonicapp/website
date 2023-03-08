@@ -27,7 +27,7 @@ export default function AppHeader() {
             <WalletButton />
             <ActionIcon
               size="md"
-              variant="light"
+              variant="subtle"
               color={dark ? 'yellow' : 'indigo'}
               onClick={() => toggleColorScheme()}
               title="Toggle color scheme"
