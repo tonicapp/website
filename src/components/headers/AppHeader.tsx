@@ -1,9 +1,10 @@
-import { Grid, Header, Title, Flex, Button, ActionIcon, useMantineColorScheme } from "@mantine/core";
+import { Grid, Header, Title, Flex, Button, ActionIcon, useMantineColorScheme, Box } from "@mantine/core";
 import Image from "next/image";
 import Sun from "@material-symbols/svg-400/outlined/light_mode.svg"
 import Moon from "@material-symbols/svg-400/outlined/dark_mode.svg"
 import { useRouter } from "next/router";
 import WalletButton from "../wallet/WalletButton";
+import Link from "next/link";
 
 export default function AppHeader() {
   const router = useRouter()
@@ -13,7 +14,7 @@ export default function AppHeader() {
     <Header height={50} fixed className="shadow-lg">
       <Grid className="mt-auto">
         <Grid.Col span={4}>
-          <Flex align="center" className="ml-5">
+          <Flex className="cursor-pointer ml-5 space-x-1" align="center" onClick={() => router.push("/")}>
             <Image src="/logo.png" alt="Tonic Logo" width={35} height={35}/>
             <Title order={5}>Tonic</Title>
           </Flex>

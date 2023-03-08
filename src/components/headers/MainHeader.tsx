@@ -13,17 +13,17 @@ export default function MainHeader() {
     <Header height={50} fixed className="shadow-lg">
       <Grid className="mt-auto">
         <Grid.Col span={4}>
-          <Flex align="center" className="ml-5 space-x-1">
+          <Flex className="cursor-pointer ml-5 space-x-1" align="center" onClick={() => router.push("/")}>
             <Image src="/logo.png" alt="Tonic Logo" width={35} height={35}/>
             <Title order={5}>Tonic</Title>
           </Flex>
         </Grid.Col>
         <Grid.Col span={4} className="flex items-center justify-center space-x-2">
           <Button color="gray" variant="subtle">
-            <Text size={10}>{`I'm an Artist`}</Text>
+            <Text size={10} onClick={() => router.push("/artists")}>{`I'm an Artist`}</Text>
           </Button>
           <Button color="gray" variant="subtle">
-            <Text size={10}>{`I'm a Fan`}</Text>
+            <Text size={10} onClick={() => router.push("/fans")}>{`I'm a Fan`}</Text>
           </Button>
         </Grid.Col>
         <Grid.Col span={4}>
