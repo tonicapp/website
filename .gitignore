@@ -19,6 +19,7 @@
 .DS_Store
 *.pem
 .env
+devnet_keypair.json
 
 # local env files
 .env*.local

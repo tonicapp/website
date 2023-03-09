@@ -19,6 +19,8 @@ const SongForm: React.FC<SongFormProps> = ({ onSubmit }) => {
   const [artist, setArtist] = useState<string>("");
   const [album, setAlbum] = useState<string>("");
   const [genre, setGenre] = useState<string>("");
+  const [numCopiesStr, setNumCopies] = useState<string>("");
+  const [pricePerUnitStr, setPricePerUnit] = useState<string>("");
   const [songFile, setSongFile] = useState<File | null>(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -65,6 +67,12 @@ const SongForm: React.FC<SongFormProps> = ({ onSubmit }) => {
           break;
         case "genre":
           setGenre(e.target.value);
+          break;
+        case "numCopiesStr":
+          setNumCopies(e.target.value);
+          break;
+        case "pricePerUnitStr":
+          setPricePerUnit(e.target.value);
           break;
     }
   };
@@ -122,7 +130,7 @@ const SongForm: React.FC<SongFormProps> = ({ onSubmit }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!title || !artist || !album || !genre || !songFile || !imageFile) {
+    if (!title || !artist || !album || !genre || !numCopiesStr || !pricePerUnitStr || !songFile || !imageFile) {
       alert('Please fill in all required fields.');
       return;
     } else if (imageFile.type !== 'image/jpeg') {
@@ -131,11 +139,17 @@ const SongForm: React.FC<SongFormProps> = ({ onSubmit }) => {
       setImagePreview(null);
       return;
     }
+    const TONIC_CUT = 0.1;  // 10% of initial sale
     const formData = new FormData();
     formData.append("title", title);
     formData.append("artist", artist);
     formData.append("album", album);
     formData.append("genre", genre);
+    const artistPubKeyStr = "4U3SKTHbUuvVTZkeY3jijhyX2y7147E3KvTVQTpM8EDy";  // Grant's addy for testing
+    formData.append("artistPubKeyStr", artistPubKeyStr);
+    formData.append("numCopiesStr", numCopiesStr);
+    formData.append("tonicCutStr", TONIC_CUT.toString());
+    formData.append("pricePerUnitStr", pricePerUnitStr);
     if (songFile) {
       formData.append("songFile", songFile);
     }
@@ -311,6 +325,14 @@ const SongForm: React.FC<SongFormProps> = ({ onSubmit }) => {
           <option value="vocal">Vocal</option>
           <option value="other">Other</option>
         </select>
+      </div>
+      <div>
+        <label htmlFor="numCopiesStr">Number of Copies to be Sold:</label>
+        <input type="number" id="numCopiesStr" name="numCopiesStr" min="1" max="10000" required onChange={handleInputChange}/>
+      </div>
+      <div>
+        <label htmlFor="pricePerUnitStr">Price per unit:</label>
+        <input type="text" id="pricePerUnitStr" name="pricePerUnitStr" pattern="[0-9]+(\.[0-9]{1,2})?" required onChange={handleInputChange}/>
       </div>
       <div>
         <label htmlFor="songFile">Song:</label>
