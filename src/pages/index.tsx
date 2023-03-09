@@ -1,8 +1,8 @@
-import { Title } from '@mantine/core'
 import Head from 'next/head'
-import Hero from 'src/components/landing/Hero'
-import { AppShell } from '@mantine/core'
-import PageHeader from 'src/components/PageHeader'
+import MainHero from 'src/components/landing/heros/MainHero'
+import MainFeatures from 'src/components/landing/features/MainFeatures'
+import LandingLayout from 'src/layouts/LandingLayout'
+import CallToAction from 'src/components/landing/CallToAction'
 import Amplify from "aws-amplify";
 import awsExports from "../aws-exports.js";
 
@@ -18,9 +18,11 @@ export default function Landing() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <AppShell header={<PageHeader />}>
-          <Hero />
-        </AppShell>
+        <LandingLayout>
+            <MainHero />
+            <MainFeatures />
+            <CallToAction />
+        </LandingLayout>
       </main>
     </>
   )
