@@ -7,7 +7,7 @@ import { Metaplex, keypairIdentity, Metadata, Nft } from "@metaplex-foundation/j
 exports.handler = async (event) => {
     console.log(`EVENT: ${JSON.stringify(event)}`);
 
-    const walletPubKey = event.pathParameters.address
+    const walletPubKey = event.pathParameters.address;
     const connection = new Connection("https://quiet-muddy-meme.solana-mainnet.discover.quiknode.pro/beec717c55f2af294810049f0ef8fe46afd7eb6b/");
     const keypair = Keypair.generate();
 

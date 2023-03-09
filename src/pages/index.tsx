@@ -3,6 +3,10 @@ import Head from 'next/head'
 import Hero from 'src/components/landing/Hero'
 import { AppShell } from '@mantine/core'
 import PageHeader from 'src/components/PageHeader'
+import Amplify from "aws-amplify";
+import awsExports from "../aws-exports.js";
+
+Amplify.Amplify.configure(awsExports);
 
 export default function Landing() {
   return (
