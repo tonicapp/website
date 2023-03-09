@@ -15,7 +15,7 @@
       "function": {
         "LibraryViewer": {
           "deploymentBucketName": "amplify-amplify33193672029d4-staging-103830-deployment",
-          "s3Key": "amplify-builds/LibraryViewer-774a306c584b63545437-build.zip"
+          "s3Key": "amplify-builds/LibraryViewer-61554b7564354c2f5176-build.zip"
         }
       },
       "api": {
