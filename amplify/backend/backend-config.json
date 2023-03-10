@@ -9,13 +9,52 @@
           ],
           "category": "function",
           "resourceName": "LibraryViewer"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "CreatorViewer"
         }
       ],
       "providerPlugin": "awscloudformation",
       "service": "API Gateway"
     }
   },
+  "auth": {
+    "frontend": {
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito",
+      "serviceType": "managed"
+    }
+  },
   "function": {
+    "CreatorViewer": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "LibraryViewer": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -23,6 +62,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_CreatorViewer_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "CreatorViewer"
+        }
+      ]
+    },
+    "AMPLIFY_function_CreatorViewer_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "CreatorViewer"
+        }
+      ]
+    },
     "AMPLIFY_function_LibraryViewer_deploymentBucketName": {
       "usedBy": [
         {
