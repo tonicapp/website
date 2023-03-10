@@ -9,10 +9,8 @@ export default function App({ Component, pageProps }: AppProps) {
   const toggleColorScheme = (value?: ColorScheme) =>
     setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
 
-  const testWalletPubKey = '4ewoeiKsWM4CaNMR1okdJSZpBdET8ZUn7riHtgee9Mb6';  // Devnet testing Phantom wallet
-  const apk = 'Et1ctkaVX9wADf6xqjBTxsUBMKzJcfUYMPo3riFod5zk';  // Dummy wallet
 
-
+  // Tests the creation of a Candy Machine
   const createCMTest = async () => {
     fetch("http://localhost:3333/api/testcandymachine", {
       method: "POST",
@@ -28,6 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
       });
   };
 
+  // Tests a created Candy Machine
   const checkCMTest = async () => {
     fetch("http://localhost:3333/api/testLoadCM", {
       method: "POST",
@@ -43,41 +42,6 @@ export default function App({ Component, pageProps }: AppProps) {
       });
   };
 
-  // const mintNFT = async (candyMachineAddressStr: string) => {
-  //   let metaplex = null;
-  //   fetch("http://localhost:3333/api/getmetaplexobject", {
-  //     method: "GET",
-  //     body: null,
-  //   })
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error("Failed to fetch metaplex object");
-  //       }
-  //       metaplex = response.json;
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //   });
-  //   if (!metaplex) return;
-  //   const candyMachineAddress = new PublicKey(candyMachineAddressStr); 
-  //   const candyMachine = await metaplex.candyMachines().findByAddress({ address: candyMachineAddress });
-
-  //   const { nft } = await metaplex.candyMachines().mint(
-  //     {
-  //       candyMachine,
-  //       authority,  // Collection Update Authority. Having this as a Keypair is causing an error but idk why?
-  //       owner: buyer.publicKey,
-  //       guards: {
-  //         thirdPartySigner: {
-  //           signer: authority,
-  //         },
-  //       }
-  //     },
-  //     {
-  //       payer: buyer,  // Do I have access to a user's full wallet through the front end? How else would I do this?
-  //     },
-  //   );
-  // }
 
   return (
     <ColorSchemeProvider colorScheme={ colorScheme } toggleColorScheme={toggleColorScheme}>
