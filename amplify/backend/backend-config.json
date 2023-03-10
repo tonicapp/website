@@ -1,0 +1,43 @@
+{
+  "api": {
+    "apifcda6ed5": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "LibraryViewer"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "function": {
+    "LibraryViewer": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_LibraryViewer_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "LibraryViewer"
+        }
+      ]
+    },
+    "AMPLIFY_function_LibraryViewer_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "LibraryViewer"
+        }
+      ]
+    }
+  }
+}

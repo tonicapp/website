@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/wallet/{address}": {
+      "name": "/wallet/{address}",
+      "lambdaFunction": "LibraryViewer",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}
