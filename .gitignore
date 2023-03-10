@@ -36,8 +36,6 @@ config.py
 *.tsbuildinfo
 next-env.d.ts
 
-/amplify
-
 amplify/team-provider-info.json
 
 #amplify-do-not-edit-begin
