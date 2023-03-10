@@ -1,10 +1,9 @@
-import { Grid, Header, Title, Flex, Button, ActionIcon, useMantineColorScheme, Box } from "@mantine/core";
+import { Grid, Header, Title, Flex, Button, ActionIcon, useMantineColorScheme, Text } from "@mantine/core";
 import Image from "next/image";
 import Sun from "@material-symbols/svg-400/outlined/light_mode.svg"
 import Moon from "@material-symbols/svg-400/outlined/dark_mode.svg"
 import { useRouter } from "next/router";
 import WalletButton from "../wallet/WalletButton";
-import Link from "next/link";
 
 export default function AppHeader() {
   const router = useRouter()
@@ -20,8 +19,12 @@ export default function AppHeader() {
           </Flex>
         </Grid.Col>
         <Grid.Col span={4} className="flex items-center justify-center space-x-2">
-          <Button color="gray" variant="subtle">Explore</Button>
-          <Button color="gray" variant="subtle">Top Charts</Button>
+        <Button color="gray" variant="subtle">
+          <Text size={10} onClick={() => {}}>Explore</Text>
+        </Button>
+        <Button color="gray" variant="subtle">
+          <Text size={10} onClick={() => {}}>Top Charts</Text>
+        </Button>
         </Grid.Col>
         <Grid.Col span={4}>
           <Flex align="center" justify="end" className="mr-5">
