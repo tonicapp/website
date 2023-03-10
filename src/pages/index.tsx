@@ -4,9 +4,6 @@ import MainFeatures from 'src/components/landing/features/MainFeatures'
 import LandingLayout from 'src/layouts/LandingLayout'
 import CallToAction from 'src/components/landing/CallToAction'
 import Amplify from "aws-amplify";
-import awsExports from "src/aws-exports.js";
-
-Amplify.Amplify.configure(awsExports);
 
 export default function Landing() {
   return (

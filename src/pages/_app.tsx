@@ -4,7 +4,6 @@ import { MantineProvider, ColorScheme, ColorSchemeProvider } from '@mantine/core
 import { useState } from 'react'
 import type { AppProps } from 'next/app'
 import { Web3Provider } from "src/providers/Web3Provider"
-import Amplify, { API } from 'aws-amplify';
 
 export default function App({ Component, pageProps }: AppProps) {
 
