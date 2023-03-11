@@ -4,7 +4,6 @@ import Sun from "@material-symbols/svg-400/outlined/light_mode.svg"
 import Moon from "@material-symbols/svg-400/outlined/dark_mode.svg"
 import { useRouter } from "next/router";
 import WalletButton from "../wallet/WalletButton";
-import Link from "next/link";
 
 export default function AppHeader() {
   const router = useRouter()
@@ -24,7 +23,7 @@ export default function AppHeader() {
           <Button color="gray" variant="subtle">Top Charts</Button>
         </Grid.Col>
         <Grid.Col span={4}>
-          <Flex align="center" justify="end" className="mr-5">
+          <Flex align="center" justify="end" className="mr-5 space-x-3">
             <WalletButton />
             <ActionIcon
               size="md"

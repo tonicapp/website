@@ -35,7 +35,7 @@ export default function WalletButton() {
           <Button 
             variant="gradient" 
             radius={50} 
-            size="sm" 
+            size="xs" 
             gradient={{ from: '#3D39ED', to: '#0073FC' }} 
             leftIcon={<Wallet className="h-5 w-5 fill-white" />} 
             onClick={ publicKey ? () => clipboard.copy(publicKey.toString()) : newWallet}>

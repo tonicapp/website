@@ -52,15 +52,13 @@ export default function App({ Component, pageProps }: AppProps) {
 
 
   return (
-    <Web3Provider>
-      <ColorSchemeProvider colorScheme={ colorScheme } toggleColorScheme={toggleColorScheme}>
-        <MantineProvider theme={{ colorScheme, fontFamily: 'Inter, sans-serif' }} withGlobalStyles withNormalizeCSS>
-          <Component {...pageProps} />
-          <UploadSongPage />
-          <button  onClick={createCMTest}>Create CM Test</button>
-          <button  onClick={checkCMTest}>Check CM Test</button>
-        </MantineProvider>
-      </ColorSchemeProvider>
-    </Web3Provider>
+    <ColorSchemeProvider colorScheme={ colorScheme } toggleColorScheme={toggleColorScheme}>
+      <MantineProvider theme={{ colorScheme, fontFamily: 'Inter, sans-serif' }} withGlobalStyles withNormalizeCSS>
+        <Component {...pageProps} />
+        <UploadSongPage />
+        <button  onClick={createCMTest}>Create CM Test</button>
+        <button  onClick={checkCMTest}>Check CM Test</button>
+      </MantineProvider>
+    </ColorSchemeProvider>
   )
 }
