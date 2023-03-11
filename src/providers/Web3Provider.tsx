@@ -28,7 +28,6 @@ export const Web3Provider: FC<PropsWithChildren<{}>> = ({ children }) => {
       new SlopeWalletAdapter(),
       new TorusWalletAdapter(),
       new LedgerWalletAdapter(),
-      new UnsafeBurnerWalletAdapter(),
     ],
     [network]
   );
