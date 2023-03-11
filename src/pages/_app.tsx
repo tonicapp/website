@@ -6,9 +6,12 @@ import type { AppProps } from 'next/app'
 import "../styles/globals.css"
 import UploadSongPage from './UploadSongPage';
 import { Web3Provider } from "src/providers/Web3Provider"
+import { getFirebaseApp } from "src/lib/firebase/useFirebase"
 
 
 export default function App({ Component, pageProps }: AppProps) {
+  // init firebase
+  getFirebaseApp()
 
   const [colorScheme, setColorScheme] = useState<ColorScheme>('dark');
   const toggleColorScheme = (value?: ColorScheme) =>
