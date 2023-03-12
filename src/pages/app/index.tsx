@@ -7,13 +7,14 @@ import getRandomFruitsName from "random-fruits-name";
 import { useEffect, useState } from "react";
 
 const testLangs = ["en", "es", "ja", "pt", "pl", "fr", "de", "cs"]
-const collectionID = 10577541
+const imageCollectionID = 1853603
 
 export default function MainApp() {
   const [testData, setTestData] = useState<any[]>([])
 
-  const generateTestData = async (num: number) => {
+  const generateTestData = (num: number) => {
     let data = []
+
     for (let i = 0; i < num; i++) {
       data.push(
         {
@@ -25,14 +26,13 @@ export default function MainApp() {
     }
 
     for (let i=0; i < num; i++) {
-      // @ts-ignore
-      data[i].cover = (await fetch(`https://source.unsplash.com/collection/${collectionID}/?sig=${Math.random() * 237 + 1}`)).url
+      data[i].cover = `https://source.unsplash.com/collection/${imageCollectionID}/?sig=${i}`
     }
     setTestData(data)
   }
 
   useEffect(() => {
-    generateTestData(10)
+    generateTestData(100)
   }, [])
 
   return(

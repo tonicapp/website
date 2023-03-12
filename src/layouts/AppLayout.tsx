@@ -7,7 +7,7 @@ import MainFooter from "src/components/footers/MainFooter"
 export default function AppLayout({ children }: PropsWithChildren) {
   return (
     <Web3Provider>
-      <AppShell header={<AppHeader />} footer={<MainFooter />}>
+      <AppShell header={<AppHeader />} footer={<MainFooter />} fixed={false}>
         <div className="mt-20 mb-40 mx-10">
           { children }
         </div>
