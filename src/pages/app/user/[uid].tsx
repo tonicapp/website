@@ -7,6 +7,7 @@ import AppLayout from "src/layouts/AppLayout";
 import getRandomFruitsName from 'random-fruits-name'
 import { useEffect, useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
+import UploadSongModal from 'src/components/app/song/UploadSongModal';
 
 export default function User() {
   const router = useRouter()
@@ -28,6 +29,7 @@ export default function User() {
 
   return (
     <AppLayout>
+      <UploadSongModal opened={opened} close={close} />
       <Image src={`https://source.unsplash.com/random/1920x400?background`} radius="xl" className=" rounded-lg" alt="background-image"/>
       <Flex className='space-x-10'> 
         <img src={`https://source.unsplash.com/random/400x400?profile-picture`} className={`relative w-1/6 rounded-full -mt-44 ml-20 border-solid ${colorScheme == "dark" ? `border-[#1A1B1E]`: "border-white"} border-8`} alt="background-image"/>
@@ -51,7 +53,7 @@ export default function User() {
           gradient={{ from: '#3D39ED', to: '#0073FC' }} 
           rightIcon={<Add className="h-5 w-5 fill-white"/>}
           className='mt-8'
-          onClick={() => {}}>
+          onClick={open}>
             Upload Song
         </Button>
       </Flex>
