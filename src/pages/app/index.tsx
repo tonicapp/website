@@ -1,4 +1,4 @@
-import SongCard from "src/components/app/SongCard"
+import SongCard from "src/components/app/song/SongCard"
 import AppLayout from "src/layouts/AppLayout"
 import { Grid } from "@mantine/core"
 
