@@ -47,7 +47,7 @@ export default function WalletButton() {
           size="xs" 
           gradient={{ from: '#3D39ED', to: '#0073FC' }} 
           leftIcon={<Avatar className="h-5 w-5 fill-white" />} 
-          onClick={() => router.push(`/user/${publicKey?.toString()}`)}>
+          onClick={() => router.push(`/app/user/${publicKey?.toString()}`)}>
             {<Text size="sm">{publicKey?.toString().substring(0, 4) + "..."}</Text>}
         </Button>
       </Menu.Target>
