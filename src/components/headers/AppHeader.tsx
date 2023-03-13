@@ -3,10 +3,13 @@ import Image from "next/image";
 import Sun from "@material-symbols/svg-400/outlined/light_mode.svg"
 import Moon from "@material-symbols/svg-400/outlined/dark_mode.svg"
 import { useRouter } from "next/router";
-import WalletButton from "../wallet/WalletButton";
+import WalletButton from "../app/wallet/WalletButton";
+import LoginButton from "../app/auth/LoginButton";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 export default function AppHeader() {
   const router = useRouter()
+  const { publicKey } = useWallet()
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const dark = colorScheme === 'dark';
   return(
@@ -24,6 +27,7 @@ export default function AppHeader() {
         </Grid.Col>
         <Grid.Col span={4}>
           <Flex align="center" justify="end" className="mr-5 space-x-3">
+            {!publicKey ? <LoginButton /> : null }
             <WalletButton />
             <ActionIcon
               size="md"
