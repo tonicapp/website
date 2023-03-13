@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 // import { Configuration, OpenAIApi } from "openai";
 // import * as dotenv from "dotenv";
 // require('dotenv').config()
@@ -15,6 +16,9 @@ interface SongFormProps {
 }
 
 const SongForm: React.FC<SongFormProps> = ({ onSubmit }) => {
+  const { connection } = useConnection();
+  const { publicKey, sendTransaction } = useWallet();
+
   const [title, setTitle] = useState<string>("");
   const [artist, setArtist] = useState<string>("");
   const [album, setAlbum] = useState<string>("");
@@ -138,6 +142,9 @@ const SongForm: React.FC<SongFormProps> = ({ onSubmit }) => {
       setImageFile(null);
       setImagePreview(null);
       return;
+    } else if (!publicKey) {
+      alert('Please connect a wallet');
+      return;
     }
     const TONIC_CUT = 0.1;  // 10% of initial sale
     const formData = new FormData();
@@ -145,11 +152,10 @@ const SongForm: React.FC<SongFormProps> = ({ onSubmit }) => {
     formData.append("artist", artist);
     formData.append("album", album);
     formData.append("genre", genre);
-    const artistPubKeyStr = "4U3SKTHbUuvVTZkeY3jijhyX2y7147E3KvTVQTpM8EDy";  // Grant's addy for testing
-    formData.append("artistPubKeyStr", artistPubKeyStr);
     formData.append("numCopiesStr", numCopiesStr);
     formData.append("tonicCutStr", TONIC_CUT.toString());
     formData.append("pricePerUnitStr", pricePerUnitStr);
+    formData.append("artistPubKeyStr", publicKey.toString());
     if (songFile) {
       formData.append("songFile", songFile);
     }

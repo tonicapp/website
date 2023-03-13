@@ -1,11 +1,11 @@
 import { FC, useMemo, PropsWithChildren } from 'react'
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
-import { UnsafeBurnerWalletAdapter,
-         PhantomWalletAdapter,
+import { PhantomWalletAdapter,
          SlopeWalletAdapter,
          TorusWalletAdapter,
-         LedgerWalletAdapter
+         LedgerWalletAdapter,
+         SolflareWalletAdapter
  } from '@solana/wallet-adapter-wallets';
 import {
     WalletModalProvider,
@@ -25,10 +25,10 @@ export const Web3Provider: FC<PropsWithChildren<{}>> = ({ children }) => {
   const wallets = useMemo(
     () => [
       new PhantomWalletAdapter(),
+      new SolflareWalletAdapter(),
       new SlopeWalletAdapter(),
       new TorusWalletAdapter(),
       new LedgerWalletAdapter(),
-      new UnsafeBurnerWalletAdapter(),
     ],
     [network]
   );

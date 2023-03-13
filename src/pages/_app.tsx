@@ -6,6 +6,7 @@ import type { AppProps } from 'next/app'
 import "../styles/globals.css"
 import UploadSongPage from './UploadSongPage';
 import { Web3Provider } from "src/providers/Web3Provider"
+import MintSong from './MintSong';
 
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -56,6 +57,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <UploadSongPage />
           <button  onClick={createCMTest}>Create CM Test</button>
           <button  onClick={checkCMTest}>Check CM Test</button>
+          <MintSong />
         </MantineProvider>
       </ColorSchemeProvider>
     </Web3Provider>
