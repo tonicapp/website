@@ -241,6 +241,8 @@ export default function UploadSongModal(props: {opened: boolean, close: () => vo
                   placeholder="0" 
                   value={pricePerUnit}
                   onChange={setPricePerUnit}
+                  precision={2}
+                  hideControls
                 />
               </div>
             </Flex>
