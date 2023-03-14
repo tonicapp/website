@@ -46,24 +46,27 @@ export default function User() {
           <Text color="muted" size="sm">{ uid }</Text>
           <Text color="muted" size="sm">{`@${user}`}</Text>
         </div>
-        <div className='mt-3'>
-         <Title>{ songsOwned }</Title>
-         <Text color="muted" size="sm">Songs Owned</Text>
-        </div>
-        <div className='mt-3'>
-         <Title>{ songsUploaded }</Title>
-         <Text color="muted" size="sm">Songs Uploaded</Text>
-        </div>
-        <Button
-          variant="gradient" 
-          radius={50} 
-          size="xs" 
-          gradient={{ from: '#3D39ED', to: '#0073FC' }} 
-          rightIcon={<Add className="h-5 w-5 fill-white"/>}
-          className='mt-8'
-          onClick={open}>
-            Upload Song
-        </Button>
+        <Flex className='w-full space-x-5' justify="end">
+          <div className='mt-3'>
+            <Title>{ songsOwned }</Title>
+            <Text color="muted" size="sm">Songs Owned</Text>
+          </div>
+          <div className='mt-3'>
+            <Title>{ songsUploaded }</Title>
+            <Text color="muted" size="sm">Songs Uploaded</Text>
+          </div>
+          <Button
+            variant="gradient" 
+            radius={50} 
+            size="xs" 
+            gradient={{ from: '#3D39ED', to: '#0073FC' }} 
+            rightIcon={<Add className="h-5 w-5 fill-white"/>}
+            className='mt-8'
+            onClick={open}>
+              Upload Song
+          </Button>
+        </Flex>
+        
       </Flex>
       <div className='mt-10 space-y-5'>
         <Title>Owned Songs</Title>
@@ -74,7 +77,7 @@ export default function User() {
                   <SongCard 
                     name={ test.songName }
                     artist={ test.artist }
-                    price={ {value: 0.00, currency: "NIC"} } 
+                    price={ {value: 0.00, currency: "USDC"} } 
                     cover={ test.cover } 
                   />
                 </>
@@ -92,7 +95,7 @@ export default function User() {
                   <SongCard 
                     name={ test.songName }
                     artist={ test.artist }
-                    price={ {value: 0.00, currency: "NIC"} } 
+                    price={ {value: 0.00, currency: "USDC"} } 
                     cover={ test.cover } 
                   />
                 </>

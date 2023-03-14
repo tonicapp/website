@@ -213,11 +213,11 @@ export default function UploadSongModal(props: {opened: boolean, close: () => vo
                 </FileButton>
               </Flex>
               <div>
-                <Flex className="space-x-3">
+                <Flex className="space-x-5">
                   <TextInput label="Title" value={title} placeholder="Song Title" onChange={setTitle}/>
                   <TextInput label="Artist" value={artist} placeholder="Artist/Group Name" onChange={setArtist}/>
                 </Flex>
-                <Flex className="space-x-3">
+                <Flex className="space-x-5">
                   <TextInput label="Album" value={album} placeholder="Album Name (optional)" onChange={setTitle}/>
                   <Autocomplete
                     label="Genre" 
@@ -230,14 +230,14 @@ export default function UploadSongModal(props: {opened: boolean, close: () => vo
                     nothingFound="Use other instead"
                   />
                 </Flex>
-                <Flex className="space-x-3">
+                <Flex className="space-x-5">
                   <NumberInput 
                     label="Number of Copies" 
                     placeholder="0" 
                     value={numCopies}
                     onChange={setNumCopies}
                   />
-                  <NumberInput 
+                  <NumberInput
                     label="Price per Unit" 
                     placeholder="0" 
                     value={pricePerUnit}
@@ -263,7 +263,7 @@ export default function UploadSongModal(props: {opened: boolean, close: () => vo
                 gradient={{ from: '#3D39ED', to: '#0073FC' }} 
                 rightIcon={<Right className="h-5 w-5 fill-white" />} 
                 onClick={nextStep}>
-                  Next
+                  Submit
               </Button>
             </Flex>
           </div>
@@ -277,7 +277,9 @@ export default function UploadSongModal(props: {opened: boolean, close: () => vo
               size="md" 
               gradient={{ from: '#3D39ED', to: '#0073FC' }} 
               rightIcon={<Right className="h-5 w-5 fill-white" />} 
-              onClick={props.close}>
+              onClick={
+                props.close
+              }>
                 Done
             </Button>
           </Flex>
