@@ -1,4 +1,5 @@
-import { Image, Flex, Title, Text, Button, useMantineColorScheme } from '@mantine/core'
+import { Image, Flex, Title, Text, Button, useMantineColorScheme, Grid } from '@mantine/core'
+import SongCard from '../../../components/app/song/SongCard'
 import { useRouter } from "next/router";
 import Add from "@material-symbols/svg-400/outlined/add.svg"
 import AppLayout from "src/layouts/AppLayout";
@@ -9,21 +10,28 @@ import { useEffect, useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import UploadSongModal from 'src/components/app/song/UploadSongModal';
 
+import { generateTestSongs } from 'src/lib/utils/test';
+
 export default function User() {
   const router = useRouter()
   const { uid } = router.query
   const [user, setUser] = useState()
   const [songsOwned, setSongsOwned] = useState<number>()
   const [songsUploaded, setSongsUploaded] = useState<number>()
-
+  const [testOwned, setTestOwned] = useState<any[]>([])
+  const [testUploaded, setTestUploaded] = useState<any[]>([])
   const [opened, {open, close}] = useDisclosure()
 
   const { colorScheme } = useMantineColorScheme()
 
   useEffect(() => {
+    const owned = Math.round(Math.random() * 100)
+    const uploaded = Math.round(Math.random() * 100)
     setUser(getRandomFruitsName())
-    setSongsOwned(Math.round(Math.random() * 100))
-    setSongsUploaded(Math.round(Math.random() * 100))
+    setSongsOwned(owned)
+    setSongsUploaded(uploaded)
+    generateTestSongs(owned, setTestOwned)
+    generateTestSongs(uploaded, setTestUploaded)
   }, []) 
   
 
@@ -57,6 +65,44 @@ export default function User() {
             Upload Song
         </Button>
       </Flex>
+      <div className='mt-10 space-y-5'>
+        <Title>Owned Songs</Title>
+        <Flex className='space-x-3 overflow-scroll'>
+          {testOwned ? testOwned.map((test: any) => {
+              return (
+                <>
+                  <SongCard 
+                    name={ test.songName }
+                    artist={ test.artist }
+                    price={ {value: 0.00, currency: "NIC"} } 
+                    cover={ test.cover } 
+                  />
+                </>
+              )
+            })
+          : null}
+        </Flex>
+      </div>
+      <div className='mt-10 space-y-5'>
+        <Title>Uploaded Songs</Title>
+        <Flex className='space-x-3 overflow-scroll'>
+          {testUploaded ? testUploaded.map((test: any) => {
+              return (
+                <>
+                  <SongCard 
+                    name={ test.songName }
+                    artist={ test.artist }
+                    price={ {value: 0.00, currency: "NIC"} } 
+                    cover={ test.cover } 
+                  />
+                </>
+
+              )
+            })
+          : null}
+        </Flex>
+      </div>
+      
       
     </AppLayout>
   )

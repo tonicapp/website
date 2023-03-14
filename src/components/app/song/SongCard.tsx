@@ -12,7 +12,7 @@ export interface ISong {
 
 export default function SongCard({ name, artist, price, cover }: ISong) {
   return (
-    <Card w={250} h="auto" radius="xl" withBorder className="shadow-md transition ease-in-out hover:shadow-xl duration-200 delay-75">
+    <Card miw={250} radius="xl" withBorder className="shadow-md transition ease-in-out hover:shadow-xl duration-200 delay-75">
       <Card.Section>
         <Image src={cover} width={250} height={200} alt={`${name} by ${artist}'s cover`} withPlaceholder />
       </Card.Section>
