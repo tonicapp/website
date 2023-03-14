@@ -32,7 +32,7 @@ export default function User() {
       <UploadSongModal opened={opened} close={close} />
       <Image src={`https://source.unsplash.com/random/1920x400?background`} radius="xl" className=" rounded-lg" alt="background-image"/>
       <Flex className='space-x-10'> 
-        <img src={`https://source.unsplash.com/random/400x400?profile-picture`} className={`relative w-1/6 rounded-full -mt-44 ml-20 border-solid ${colorScheme == "dark" ? `border-[#1A1B1E]`: "border-white"} border-8`} alt="background-image"/>
+        <img src={`https://source.unsplash.com/random/400x400?profile-picture`} className={`relative w-1/6 h-1/6 rounded-full -mt-24 ml-20 border-solid ${colorScheme == "dark" ? `border-[#1A1B1E]`: "border-white"} border-8`} alt="background-image"/>
         <div className='mt-3'>
           <Title>{ user }</Title>
           <Text color="muted" size="sm">{ uid }</Text>

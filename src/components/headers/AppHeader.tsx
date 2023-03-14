@@ -16,7 +16,7 @@ export default function AppHeader() {
     <Header height={50} fixed className="shadow-lg">
       <Grid className="mt-auto">
         <Grid.Col span={4}>
-          <Flex className="cursor-pointer ml-5 space-x-1" align="center" onClick={() => router.push("/")}>
+          <Flex className="cursor-pointer ml-5 space-x-1" align="center" onClick={() => router.push("/app")}>
             <Image src="/logo.png" alt="Tonic Logo" width={35} height={35}/>
             <Title order={5}>Tonic</Title>
           </Flex>

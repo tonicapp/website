@@ -1,12 +1,15 @@
-import { Modal, Stepper, Title, UnstyledButton, Checkbox, Text, createStyles, Flex, Button, useMantineTheme, Group } from "@mantine/core";
+import { Modal, Stepper, Title, UnstyledButton, Checkbox, Text, createStyles, Flex, Button, useMantineTheme, Group, TextInput, Autocomplete, Image, FileButton, NumberInput } from "@mantine/core";
 import { Dropzone } from '@mantine/dropzone';
-import { useState } from "react";
-import { useUncontrolled } from '@mantine/hooks';
+import { useEffect, useState } from "react";
+import { useUncontrolled, useInputState } from '@mantine/hooks';
 import Right from '@material-symbols/svg-400/outlined/chevron_right.svg';
 import Left from '@material-symbols/svg-400/outlined/chevron_left.svg';
 import Upload from '@material-symbols/svg-400/outlined/upload.svg';
 import Music from '@material-symbols/svg-400/outlined/music_note.svg';
 import Close from '@material-symbols/svg-400/outlined/close.svg';
+
+// @ts-ignore
+import jsmediatags from 'jsmediatags';
 
 const useStyles = createStyles((theme) => ({
   button: {
@@ -77,22 +80,31 @@ export function CheckboxCard({
   );
 }
 
+const genres = ["Acapella","Acid","Acid Jazz","Acid Punk","Acoustic","Alternative","Alternative Rock","Ambient","Anime","Avantgarde","Ballad","Bass","Beat","Bebob","Big Band","Black Metal","Bluegrass","Blues","Booty Bass","BritPop","Cabaret","Celtic","Chamber Music","Chanson","Chorus","Christian Gangsta Rap","Christian Rap","Christian Rock","Classic Rock","Classical","Club","Club - House","Comedy","Contemporary Christian","Country","Crossover","Cult","Dance","Dance Hall","Darkwave","Death Metal","Disco","Dream","Drum & Bass","Drum Solo","Duet","Easy Listening","Electronic","Ethnic","Euro-House","Euro-Techno","Eurodance","Fast Fusion","Folk","Folk-Rock","Folklore","Freestyle","Funk","Fusion","Game","Gangsta","Goa","Gospel","Gothic","Gothic Rock","Grunge","Hard Rock","Hardcore","Heavy Metal","Hip-Hop","House","Humour","Indie","Industrial","Instrumental","Instrumental Pop","Instrumental Rock","JPop","Jazz","Jazz+Funk","Jungle","Latin","Lo-Fi","Meditative","Merengue","Metal","Musical","National Folk","Native US","Negerpunk","New Age","New Wave","Noise","Oldies","Opera","Polka","Polsk Punk","Pop","Pop-Folk","Pop/Funk","Porn Groove","Power Ballad","Pranks","Primus","Progressive Rock","Psychadelic","Psychedelic Rock","Punk","Punk Rock","R&B","Rap","Rave","Reggae","Retro","Revival","Rhythmic Soul","Rock","Rock & Roll","Salsa","Samba","Satire","Showtunes","Ska","Slow Jam","Slow Rock","Sonata","Soul","Sound Clip","Soundtrack","Southern Rock","Space","Speech","Swing","Symphonic Rock","Symphony","Synthpop","Tango","Techno","Techno-Industrial","Terror","Thrash Metal","Trailer","Trance","Tribal","Trip-Hop","Vocal","Other"]
+
 export default function UploadSongModal(props: {opened: boolean, close: () => void}) {
   const [active, setActive] = useState(0);
   const nextStep = () => setActive((current) => (current < 4 ? current + 1 : current));
   const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
   const [songChecked, setSongChecked] = useState(true);
-  const [file, setFile] = useState<any>();
-  const [title, setTitle] = useState<string>("");
-  const [artist, setArtist] = useState<string>("");
-  const [album, setAlbum] = useState<string>("");
-  const [genre, setGenre] = useState<string>("");
-  const [numCopiesStr, setNumCopies] = useState<string>("");
-  const [pricePerUnitStr, setPricePerUnit] = useState<string>("");
+  const [title, setTitle] = useInputState("")
+  const [artist, setArtist] = useInputState("")
+  const [album, setAlbum] = useInputState("")
+  const [genre, setGenre] = useInputState("")
+  const [numCopies, setNumCopies] = useState<number | undefined>(0)
+  const [pricePerUnit, setPricePerUnit] = useState<number | undefined>(0)
   const [songFile, setSongFile] = useState<File | null>(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const theme = useMantineTheme();
+
+  useEffect(() => {
+    if (imageFile) {
+      const url = URL.createObjectURL(imageFile)
+      setImagePreview(url)
+      return () => URL.revokeObjectURL(url)
+    }
+  }, [imageFile])
 
   return (
     <Modal opened={props.opened} onClose={props.close} size="xl" centered radius="xl">
@@ -121,11 +133,21 @@ export default function UploadSongModal(props: {opened: boolean, close: () => vo
           <div className="mt-10">
             <Dropzone
               onDrop={(files) => {
-                setFile(files[0])
+                setSongFile(files[0])
+                jsmediatags.read(files[0], {
+                  onSuccess: function(tag: any) {
+                    setTitle(tag.tags.title ? tag.tags.title : null);
+                    setArtist(tag.tags.artist ? tag.tags.artist : null);
+                    setAlbum(tag.tags.album ? tag.tags.album : null);
+                  },
+                  onError: function(error: any) {
+                    console.log(error);
+                  }
+                })
                 nextStep()
               }}
               maxSize={10 * 1024 ** 2}
-              accept={['audio/mpeg']}
+              accept={['audio/mpeg', 'audio/mp3', 'audio/wav']}
               {...props}
             >
               <Group position="center" spacing="xl" className="pointer-events-none" mih={200}>
@@ -171,6 +193,59 @@ export default function UploadSongModal(props: {opened: boolean, close: () => vo
         </Stepper.Step>
         <Stepper.Step label="Metadata" description="Add relavent metadata">
           <div className="mt-10">
+            <Flex className="space-x-10">
+              <Flex direction="column" align="center" className="space-y-3">
+                <Image width={200} height={200} src={imagePreview} withPlaceholder alt="image cover"/>
+                <FileButton onChange={(file) => {
+                  setImageFile(file)
+                }}
+                accept="image/png,image/jpeg">
+                  {(props) => 
+                  <Button
+                    {...props}
+                    variant="gradient" 
+                    radius={50} 
+                    size="xs" 
+                    gradient={{ from: '#3D39ED', to: '#0073FC' }} 
+                  >
+                      Upload Image
+                  </Button>}
+                </FileButton>
+              </Flex>
+              <div>
+                <Flex className="space-x-3">
+                  <TextInput label="Title" value={title} placeholder="Song Title" onChange={setTitle}/>
+                  <TextInput label="Artist" value={artist} placeholder="Artist/Group Name" onChange={setArtist}/>
+                </Flex>
+                <Flex className="space-x-3">
+                  <TextInput label="Album" value={album} placeholder="Album Name (optional)" onChange={setTitle}/>
+                  <Autocomplete
+                    label="Genre" 
+                    placeholder="Type to search" 
+                    value={genre} 
+                    data={genres} 
+                    onChange={setGenre}
+                    limit={5}
+                    dropdownPosition="bottom" 
+                    nothingFound="Use other instead"
+                  />
+                </Flex>
+                <Flex className="space-x-3">
+                  <NumberInput 
+                    label="Number of Copies" 
+                    placeholder="0" 
+                    value={numCopies}
+                    onChange={setNumCopies}
+                  />
+                  <NumberInput 
+                    label="Price per Unit" 
+                    placeholder="0" 
+                    value={pricePerUnit}
+                    onChange={setPricePerUnit}
+                  />
+                </Flex>
+              </div>
+            </Flex>
             <Flex justify="space-between" className="mt-20">
               <Button 
                 variant="outline"
@@ -193,23 +268,19 @@ export default function UploadSongModal(props: {opened: boolean, close: () => vo
             </Flex>
           </div>
         </Stepper.Step>
-        <Stepper.Step label="Cover" description="Add a song cover image">
-          <div className="mt-10">
-            <Flex justify="start" className="mt-20">
-              <Button 
-                variant="outline"
-                color="gray"
-                radius={50} 
-                size="md" 
-                leftIcon={<Left className="h-5 w-5 fill-white" />} 
-                onClick={prevStep}>
-                  Back
-              </Button>
-            </Flex>
-          </div>
-        </Stepper.Step>
         <Stepper.Completed>
-          Completed, click back button to get to previous step
+          <Title>Congratulations on uploading your new song!</Title>
+          <Flex justify="space-between" className="mt-20">
+            <Button 
+              variant="gradient" 
+              radius={50} 
+              size="md" 
+              gradient={{ from: '#3D39ED', to: '#0073FC' }} 
+              rightIcon={<Right className="h-5 w-5 fill-white" />} 
+              onClick={props.close}>
+                Done
+            </Button>
+          </Flex>
         </Stepper.Completed>
       </Stepper>
     </Modal>
