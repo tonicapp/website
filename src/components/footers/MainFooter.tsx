@@ -45,7 +45,7 @@ export default function MainFooter() {
             <Text color="dimmed" size="xs">Stay up to date with everything Tonic</Text>
           </div>
           <Flex className="space-x-2">
-            <TextInput placeholder="Your Email" radius="xl" />
+            <TextInput placeholder="your@email.com" type="email" autoComplete="email" radius="xl" />
             <Button color="gray" variant="outline" radius="xl">Sign Up</Button>
           </Flex>
         </Grid.Col>
