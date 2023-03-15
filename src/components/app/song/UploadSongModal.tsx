@@ -300,7 +300,10 @@ export default function UploadSongModal(props: {opened: boolean, close: () => vo
                 size="md" 
                 gradient={{ from: '#3D39ED', to: '#0073FC' }} 
                 rightIcon={<Right className="h-5 w-5 fill-white" />} 
-                onClick={nextStep}>
+                onClick={ () => {
+                  onSubmit()
+                  nextStep()
+                }}>
                   Submit
               </Button>
             </Flex>
