@@ -27,8 +27,7 @@ export default function AppHeader() {
         </Grid.Col>
         <Grid.Col span={4}>
           <Flex align="center" justify="end" className="mr-5 space-x-3">
-            {!publicKey ? <LoginButton /> : null }
-            <WalletButton />
+            <LoginButton />
             <ActionIcon
               size="md"
               variant="subtle"

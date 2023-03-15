@@ -10,6 +10,7 @@ import Close from '@material-symbols/svg-400/outlined/close.svg';
 
 // @ts-ignore
 import jsmediatags from 'jsmediatags';
+import { useWallet } from "@solana/wallet-adapter-react";
 
 const useStyles = createStyles((theme) => ({
   button: {
@@ -97,6 +98,43 @@ export default function UploadSongModal(props: {opened: boolean, close: () => vo
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const theme = useMantineTheme();
+
+  const { publicKey } = useWallet()
+
+  const handleSubmit = (formData: FormData) => {
+    fetch("http://localhost:3333/api/uploadsong", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to upload song");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const onSubmit = () => {
+    const TONIC_CUT = 0.1;  // 10% of initial sale
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("artist", artist);
+    formData.append("album", album);
+    formData.append("genre", genre);
+    formData.append("artistPubKeyStr", publicKey!.toString());
+    formData.append("numCopiesStr", numCopies + "");
+    formData.append("tonicCutStr", TONIC_CUT.toString());
+    formData.append("pricePerUnitStr", pricePerUnit + "");
+    if (songFile) {
+      formData.append("songFile", songFile);
+    }
+    if (imageFile) {
+      formData.append("imageFile", imageFile);
+    }
+    handleSubmit(formData);
+  }
 
   useEffect(() => {
     if (imageFile) {
@@ -262,7 +300,10 @@ export default function UploadSongModal(props: {opened: boolean, close: () => vo
                 size="md" 
                 gradient={{ from: '#3D39ED', to: '#0073FC' }} 
                 rightIcon={<Right className="h-5 w-5 fill-white" />} 
-                onClick={nextStep}>
+                onClick={ () => {
+                  onSubmit()
+                  nextStep()
+                }}>
                   Submit
               </Button>
             </Flex>

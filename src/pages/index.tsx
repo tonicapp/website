@@ -16,8 +16,6 @@ export default function Landing() {
       <main>
         <LandingLayout>
             <MainHero />
-            <MainFeatures />
-            <CallToAction />
         </LandingLayout>
       </main>
     </>

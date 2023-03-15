@@ -7,7 +7,7 @@ export default function FanHero() {
     <Flex direction="column" align="center" className="space-y-5 pt-20">
       <Title className='text-7xl'>{`I'm a Fan`}</Title>
       <div className="max-w-xl">
-        <Text className="text-center" color="dimmed">Cool text about why it is cool to be a fan and how Tonic makes it easy to support your favorite artists in a very cool way.</Text>
+        <Text className="text-center" color="dimmed">Fans can support artists in more ways than ever before. Take advantage of the new era of fan engagement with Tonic!</Text>
       </div>
       <Button
           size="lg"
