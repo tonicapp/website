@@ -20,7 +20,7 @@ export default function MainApp() {
               <SongCard 
                 name={ test.songName }
                 artist={ test.artist }
-                price={ {value: 0.00, currency: "NIC"} } 
+                price={ {value: 0.00, currency: "USDC"} } 
                 cover={ test.cover } 
               />
             </Grid.Col>

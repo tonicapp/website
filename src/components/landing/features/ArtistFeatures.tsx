@@ -23,7 +23,7 @@ export default function ArtistFeatures() {
             <Image width={500} height={500} src="/usdc.png" alt="rewards" className="h-full w-full"/>
           </Grid.Col>
           <Grid.Col span={7} className="space-y-5 pl-12 pt-12">
-            <Title className="text-4xl">Unlock a new revnue stream</Title>
+            <Title className="text-4xl">Unlock a new revenue stream</Title>
             <Text>
               Expand your business and unlock untapped potential! You can effortlessly seize a brand new revenue stream and achieve new levels of growth.
             </Text>
@@ -33,11 +33,9 @@ export default function ArtistFeatures() {
       <Card radius="xl" withBorder shadow="lg" maw={800}>
         <Grid>
           <Grid.Col span={7} className="space-y-5 pl-12 pt-12">
-            <Title className="text-4xl">Earn amazing rewards</Title>
+            <Title className="text-4xl">Connect With Fans</Title>
             <Text>
-              Unlock exclusive rewards for supporting your favorite 
-              artists - limited merch, discounts, pre-sales, livestreams, 
-              and more! Show your love and gain access to perks.
+              Interact with fans directly on Tonic without the need to use a third party social media platform. Build you fanbase and grow your community alongside your biggest supports.
             </Text>
           </Grid.Col>
           <Grid.Col span={5} className="flex justify-end">

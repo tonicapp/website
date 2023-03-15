@@ -6,8 +6,8 @@ export default function MainHero() {
   const router = useRouter()
   return (
     <Flex className='w-full justify-center flex-col'>
-      <Title order={4} fw={400} className='text-center' italic>Impressive</Title>
-      <Title className='text-center text-7xl'>Catch Phrase</Title>
+      <Title className='text-center text-8xl'>Tonic</Title>
+      <Title order={4} fw={400} className='text-center' italic>The artist-first platform revolutionizing fan engagement.</Title>
 
       <Grid className='mt-16'>
         <Grid.Col span={6}>

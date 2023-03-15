@@ -14,6 +14,7 @@ export default function FanFeatures() {
             <Text>
               Cut out the middle man and support your favorite artists 
               directly by buying their songs, albums, playlists, and merch.
+              {`Truly own the music you buy - it's impossible for us to take it away from you.`}
             </Text>
           </Grid.Col>
         </Grid>
@@ -29,7 +30,20 @@ export default function FanFeatures() {
             </Text>
           </Grid.Col>
           <Grid.Col span={5} className="flex justify-end">
-            <Image width={500} height={500} src="/rewards.png" alt="headphones" className="h-full w-full"/>
+            <Image width={500} height={500} src="/rewards.png" alt="rewards" className="h-full w-full"/>
+          </Grid.Col>
+        </Grid>
+      </Card>
+      <Card radius="xl" withBorder shadow="lg" maw={800}>
+        <Grid>
+          <Grid.Col span={5} className="flex justify-end">
+            <Image width={500} height={500} src="/rewards.png" alt="rewards" className="h-full w-full"/>
+          </Grid.Col>
+          <Grid.Col span={7} className="space-y-5 pl-12 pt-12">
+            <Title className="text-4xl">Earn alongside artists</Title>
+            <Text>
+            Buy and resell songs at any price you choose. You control the secondary market and have the opportunity to profit alongside your favorite artists.
+            </Text>
           </Grid.Col>
         </Grid>
       </Card>
