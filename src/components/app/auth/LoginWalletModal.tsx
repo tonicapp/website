@@ -1,7 +1,9 @@
 import { Box, Progress, PasswordInput, Group, Text, Center, Modal, TextInput, Tabs, Button, Flex, Divider, Title, Grid } from '@mantine/core';
 import { useInputState } from '@mantine/hooks';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 import { IconCheck, IconX } from '@tabler/icons-react';
-import  { useState } from 'react'
+import  { useEffect, useState } from 'react'
 import WalletButton from '../wallet/WalletButton';
 
 function PasswordRequirement({ meets, label }: { meets: boolean; label: string }) {
@@ -43,6 +45,8 @@ export default function LoginWalletModal(props: {opened: boolean, close: ()=> vo
     <PasswordRequirement key={index} label={requirement.label} meets={requirement.re.test(password)} />
   ));
 
+  const { publicKey } = useWallet()
+
   const bars = Array(4)
   .fill(0)
   .map((_, index) => (
@@ -56,6 +60,12 @@ export default function LoginWalletModal(props: {opened: boolean, close: ()=> vo
       size={4}
     />
   ));
+
+  useEffect(() => {
+    if (publicKey) {
+      props.close()
+    }
+  }, [publicKey])
 
   const [activeTab, setActiveTab] = useState<string | null>('login');
 
